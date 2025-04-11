@@ -1,23 +1,20 @@
-class Student:
-    def __init__(self, name):
-        self.name = name
-        self.__courses = {}
+class Human:
+    def __init__(self, pos_x, pos_y, speed):
+        self.__pos_x = pos_x
+        self.__pos_y = pos_y
+        self.__speed = speed
 
-    def calculate_letter_grade(self, score):
-        if score >= 90:
-            return 'A'
-        elif score >= 80 and score <= 89:
-            return 'B'
-        elif score >= 70 and score <= 79:
-            return 'C'
-        elif score >= 60 and score <= 69:
-            return 'D'
-        else: 
-            return 'F'
-         
-    def add_course(self, course_name, score):
-        letter_grade = self.calculate_letter_grade(score)
-        self.__courses[course_name] = letter_grade
+    def move_right(self):
+        pass
 
-    def get_courses(self):
-        return self.__courses
+    def move_left(self):
+        pass
+
+    def move_up(self):
+        pass
+
+    def move_down(self):
+        pass
+
+    def get_position(self):
+        pass
