@@ -1,67 +1,70 @@
-from main import Human
+from main import Calculator
 
 run_cases = [
-    ((0, 0, 5, 3), ["sprint_right"], (10, 0, None)),
-    (
-        (0, 0, 20, 3),
-        [
-            "sprint_left",
-            "sprint_left",
-            "sprint_left",
-        ],
-        (-120, 0, None),
-    ),
-    (
-        (1, 1, 3, 1),
-        ["sprint_down", "sprint_right"],
-        (1, -5, "not enough stamina to sprint"),
-    ),
+    (10, [("add", 5), ("subtract", 3)], 12),
+    (5, [("multiply", 2), ("divide", 2)], 5),
 ]
-
 
 submit_cases = run_cases + [
-    (
-        (1, 1, 5, 2),
-        ["sprint_left", "sprint_up", "sprint_down"],
-        (-9, 11, "not enough stamina to sprint"),
-    ),
+    (10, [("divide", 0)], None, "cannot divide by zero"),
+    (7, [("modulo", 4)], 3),
+    (10, [("power", 3)], 1000),
+    (99, [("clear", None), ("power", 2)], 0),
+    (9, [("square_root", None), ("add", 5)], 8),
 ]
 
+actions = {
+    "add": Calculator.add,
+    "subtract": Calculator.subtract,
+    "multiply": Calculator.multiply,
+    "divide": Calculator.divide,
+    "modulo": Calculator.modulo,
+    "power": Calculator.power,
+    "square_root": Calculator.square_root,
+    "clear": Calculator.clear,
+}
 
-def test(human_args, methods, expected_output):
+
+def test(starting_num, actions_list, expected_output, expected_err=None):
     print("---------------------------------")
-    print(f"Starting values:")
-    human = Human(*human_args)
-    print(f" * x: {human_args[0]}")
-    print(f" * y: {human_args[1]}")
-    print(f" * speed: {human_args[2]}")
-    print(f" * stamina: {human_args[3]}")
-    for method in methods:
-        print(f" - calling {method}...")
+    print(f"Starting Number: {starting_num}, Actions: {actions_list}")
+    calculator = Calculator()
+    calculator.add(starting_num)
     try:
-        for method in methods:
-            getattr(human, method)()
-        actual_x, actual_y = human.get_position()
-        actual_err = None
+        result = calculator.result
+        print("'result' attribute is not private")
+        print("Fail 3")
+        return False
     except Exception as e:
-        actual_x, actual_y = human.get_position()
+        if str(e) != "'Calculator' object has no attribute 'result'":
+            print("Exception: " + str(e))
+            print("Fail 4")
+            return False
+    try:
+        for action, number in actions_list:
+            if number is None:
+                actions[action](calculator)
+            else:
+                actions[action](calculator, number)
+        result = calculator.get_result()
+        print(f"Expected Output: {expected_output}")
+        print(f"Actual Output:   {result}")
+        if float(result) == float(expected_output):
+            print("Pass 1")
+            return True
+        else:
+            print("Fail 1")
+            return False
+    except Exception as e:
         actual_err = str(e)
-    expected_x, expected_y, expected_error = expected_output
-    print(f"Expected x: {expected_x}")
-    print(f"Actual   x: {actual_x}")
-    print(f"Expected y: {expected_y}")
-    print(f"Actual   y: {actual_y}")
-    print(f"Expected error: {expected_error}")
-    print(f"Actual   error: {actual_err}")
-    if (
-        actual_x == expected_x
-        and actual_y == expected_y
-        and actual_err == expected_error
-    ):
-        print("Pass")
+        print(f"Expected Error: {expected_err}")
+        print(f"Actual Error: {actual_err}")
+    if actual_err == expected_err:
+        print("Pass 2")
         return True
-    print("Fail")
-    return False
+    else:
+        print("Fail 2")
+        return False
 
 
 def main():
