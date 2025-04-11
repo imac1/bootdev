@@ -1,3 +1,4 @@
+
 class Calculator:
     def __init__(self):
         self.__result = 0
