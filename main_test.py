@@ -1,4 +1,4 @@
-from main import *
+from main import Human
 
 run_cases = [
     ("Will", 1, "Darren", 4, None, 1),
