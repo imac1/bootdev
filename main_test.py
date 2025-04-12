@@ -1,75 +1,63 @@
-from main import Human
+from main import *
 
 run_cases = [
-    ("Faramir", "Human", None),
-    ("Bard", "Archer", 1),
+    ("Will", 1, "Darren", 4, None, 1),
+    ("Elena", 5, "Connor", 3, None, 0),
 ]
 
 submit_cases = run_cases + [
-    ("Boromir", "Human", None),
-    ("Aragorn", "Human", None),
-    ("Legolas", "Archer", 93828),
+    ("Jake", 0, "Victor", 3, None, 0),
+    ("Ryan", 2, "Emma", 1, "not enough arrows", None),
+    ("Zoe", 10, "Lucas", 8, None, 5),
 ]
 
 
-def test_inheritance():
+def test(
+    archer_name,
+    archer_arrows,
+    crossbowman_name,
+    crossbowman_bolts,
+    expected_exception,
+    expected_remaining_bolts,
+):
     print("---------------------------------")
-    print("Inheritance Test:")
-    if "Archer" not in globals():
-        print("Archer class not found")
-        return False
-    if "Human" not in globals():
-        print("Human class not found")
-        return False
-    if not issubclass(Archer, Human):
-        print("Archer is not a child class of Human")
-        return False
-    print("Archer is a child class of Human")
-    return True
-
-
-def test(name, type, num_arrows):
-    print("---------------------------------")
-    print(f"Type:   {type}")
-    print(f"Name:   {name}")
-    if type == "Archer":
-        print(f"Arrows: {num_arrows}")
+    print(f"Archer: {archer_name}, Arrows: {archer_arrows}")
+    archer = Archer(archer_name, archer_arrows)
+    print(f"Crossbowman: {crossbowman_name}, Arrows: {crossbowman_bolts}")
     print("")
+    crossbowman = Crossbowman(crossbowman_name, crossbowman_bolts)
     try:
-        if type == "Human":
-            human = Human(name)
-            print(f"Expecting name: {name}")
-            print(f"Actual name:    {human.get_name()}")
-            if human.get_name() == name:
-                return True
-            else:
-                return False
-        else:
-            archer = Archer(name, num_arrows)
-            print(f"Expecting name:   {name}")
-            print(f"Actual name:      {archer.get_name()}")
-            print(f"Expecting arrows: {num_arrows}")
-            print(f"Actual arrows:    {archer.get_num_arrows()}")
-            if archer.get_name() == name and archer.get_num_arrows() == num_arrows:
-                return True
-            else:
-                return False
+        expected_str = f"{archer_name} was shot by 3 crossbow bolts"
+        actual_str = crossbowman.triple_shot(archer)
+        if expected_exception:
+            print(
+                f"Expected exception '{expected_exception}', but no exception occurred"
+            )
+            return False
+        print(f"Expected triple_shot message: {expected_str}")
+        print(f"Actual triple_shot message:   {actual_str}")
+        if actual_str != expected_str:
+            return False
+
+        print(f"Expected remaining bolts: {expected_remaining_bolts}")
+        print(f"Actual remaining bolts:   {crossbowman.get_num_arrows()}")
+        if crossbowman.get_num_arrows() != expected_remaining_bolts:
+            return False
+        return True
     except Exception as e:
-        print(f"Error: {e}")
-        return False
+        if str(e) == expected_exception:
+            print(f"Expected exception: {expected_exception}")
+            print(f"Actual exception:   {e}")
+            return True
+        else:
+            print(f"Unexpected exception: {e}")
+            return False
 
 
 def main():
     passed = 0
     failed = 0
     skipped = len(submit_cases) - len(test_cases)
-    correct = test_inheritance()
-    if correct:
-        print("Pass")
-        passed += 1
-    else:
-        print("Fail")
-        failed += 1
     for test_case in test_cases:
         correct = test(*test_case)
         if correct:
