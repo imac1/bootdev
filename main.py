@@ -23,7 +23,7 @@ class Archer(Human):
 
 class Crossbowman(Archer):
     def __init__(self, name, num_arrows):
-        pass
+        super().__init__(name, num_arrows)
 
     def triple_shot(self, target):
         pass
