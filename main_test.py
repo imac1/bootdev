@@ -1,3 +1,4 @@
+
 from main import DeckOfCards
 
 run_cases = [
@@ -79,8 +80,6 @@ submit_cases = run_cases + [
             None,
         ],
     ),
-]
-
 
 def test(action, num_cards, expected):
     print("---------------------------------")
