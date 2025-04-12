@@ -1,6 +1,5 @@
 import random
 
-
 class DeckOfCards:
     SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
     RANKS = [
@@ -27,13 +26,14 @@ class DeckOfCards:
         for suit in self.SUITS:
             for rank in self.RANKS:
                 self.__cards.append((rank, suit))
-                
 
     def shuffle_deck(self):
-        pass
+        random.shuffle(self.__cards)
 
     def deal_card(self):
-        pass
+        if self.__cards:
+            return self.__cards.pop()
+        return None
 
     # don't touch below this line
 
