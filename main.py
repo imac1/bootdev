@@ -1,42 +1,17 @@
+class Human:
+    def __init__(self, name):
+        self.__name = name
 
-import random
-
-class DeckOfCards:
-    SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
-    RANKS = [
-        "Ace",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "Jack",
-        "Queen",
-        "King",
-    ]
-
-    def __init__(self):
-        self.__cards = []
-        self.create_deck()
-
-    def create_deck(self):
-        for suit in self.SUITS:
-            for rank in self.RANKS:
-                self.__cards.append((rank, suit))
-
-    def shuffle_deck(self):
-        random.shuffle(self.__cards)
-
-    def deal_card(self):
-        if self.__cards:
-            return self.__cards.pop()
-        return None
-
-    def __str__(self):
-        return f"The deck has {len(self.__cards)} cards"
+    def get_name(self):
+        return self.__name
 
 
+## don't touch above this line
+
+
+class Archer:
+    def __init__(self, name, num_arrows):
+        pass
+
+    def get_num_arrows(self):
+        pass
