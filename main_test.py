@@ -1,4 +1,4 @@
-from main import *
+from main import DeckOfCards
 
 run_cases = [
     ("shuffle_deck", 3, [("9", "Hearts"), ("Jack", "Clubs"), ("10", "Spades")]),
