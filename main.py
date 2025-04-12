@@ -1,3 +1,4 @@
+
 import random
 
 class DeckOfCards:
@@ -26,7 +27,6 @@ class DeckOfCards:
         for suit in self.SUITS:
             for rank in self.RANKS:
                 self.__cards.append((rank, suit))
-                
 
     def shuffle_deck(self):
         random.shuffle(self.__cards)
@@ -36,7 +36,7 @@ class DeckOfCards:
             return self.__cards.pop()
         return None
 
-    # don't touch below this line
-
     def __str__(self):
         return f"The deck has {len(self.__cards)} cards"
+
+
