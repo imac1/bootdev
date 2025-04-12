@@ -1,35 +1,42 @@
 
-class Calculator:
+import random
+
+class DeckOfCards:
+    SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
+    RANKS = [
+        "Ace",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+    ]
+
     def __init__(self):
-        self.__result = 0
+        self.__cards = []
+        self.create_deck()
 
-    def add(self, a):
-        self.__result += a
+    def create_deck(self):
+        for suit in self.SUITS:
+            for rank in self.RANKS:
+                self.__cards.append((rank, suit))
 
-    def subtract(self, a):
-        self.__result -= a
+    def shuffle_deck(self):
+        random.shuffle(self.__cards)
 
-    def multiply(self, a):
-        self.__result *= a
+    def deal_card(self):
+        if self.__cards:
+            return self.__cards.pop()
+        return None
 
-    def divide(self, a):
-        if a == 0:
-            raise ValueError('cannot divide by zero')
-        self.__result /= a
+    def __str__(self):
+        return f"The deck has {len(self.__cards)} cards"
 
-    def modulo(self, a):
-        if a == 0:
-            raise ValueError('cannot divide by zero')
-        self.__result %= a
 
-    def power(self, a):
-        self.__result = self.__result**a
-
-    def square_root(self):
-        self.__result = self.__result ** 0.5
-
-    def clear(self):
-        self.__result = 0
-
-    def get_result(self):
-        return self.__result
