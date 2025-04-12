@@ -1,4 +1,5 @@
 
+import random
 from main import DeckOfCards
 
 run_cases = [
