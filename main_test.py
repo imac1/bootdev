@@ -1,4 +1,4 @@
-from main import *
+from main import Square, Rectangle
 
 run_cases = [
     ((2, 4), 8, 12),
