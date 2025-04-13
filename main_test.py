@@ -1,50 +1,47 @@
-from main import Siege, BatteringRam, Catapult
+from main import Rectangle
 
 run_cases = [
-    (Siege(100, 10), 100, 4, 40, None),
-    (BatteringRam(100, 10, 2000, 5), 100, 5, 70, 10),
-    (Catapult(100, 10, 2), 100, 6, 60, 2),
+    ((1, 2, 3, 4), (1, 3, 4, 2)),
+    ((3, 4, 1, 2), (1, 3, 4, 2)),
 ]
 
 submit_cases = run_cases + [
-    (Siege(60, 5), 100, 2, 40, None),
-    (BatteringRam(80, 5, 2000, 4), 100, 4, 100, 8),
-    (Catapult(90, 4, 3), 100, 10, 250, 3),
+    ((5, 4, 2, 1), (2, 5, 4, 1)),
 ]
 
 
-def test(vehicle, distance, fuel_price, expected_cost, expected_cargo_volume):
-    try:
-        vehicle_type = vehicle.__class__.__name__
-        actual_cost = int(vehicle.get_trip_cost(distance, fuel_price))
-        actual_cargo_volume = vehicle.get_cargo_volume()
-        if actual_cargo_volume is not None:
-            actual_cargo_volume = int(actual_cargo_volume)
-        print("---------------------------------")
-        print(f"Testing {vehicle_type}")
-        print(f" * Max Speed:  {vehicle.max_speed} kph")
-        print(f" * Efficiency: {vehicle.efficiency} km/food")
-        print(f"Expected Cargo Volume: {expected_cargo_volume}")
-        print(f"Actual Cargo Volume:   {actual_cargo_volume}")
-        print("")
-        print(f"Inputs:")
-        print(f" * Distance: {distance} km")
-        print(f" * Price: {fuel_price} per food")
-        print(f"Expected Trip Cost: {expected_cost} ")
-        print(f"Actual Trip Cost:   {actual_cost}")
-        if (
-            actual_cost == expected_cost
-            and expected_cargo_volume == actual_cargo_volume
-        ):
-            print("Pass")
-            return True
-        else:
-            print("Fail")
-            return False
-    except Exception as e:
-        print(f"Error: {e}")
-        print("Fail")
-        return False
+def test(rect_args, expected_output):
+    rectangle = Rectangle(rect_args[0], rect_args[1], rect_args[2], rect_args[3])
+    print("---------------------------------")
+    print("Inputs Rectangle:")
+    print(f" * x1: {rect_args[0]}")
+    print(f" * y1: {rect_args[1]}")
+    print(f" * x2: {rect_args[2]}")
+    print(f" * y2: {rect_args[3]}")
+    print("")
+
+    expected_left_x, expected_right_x, expected_top_y, expected_bottom_y = (
+        expected_output
+    )
+
+    actual_left_x = rectangle.get_left_x()
+    actual_right_x = rectangle.get_right_x()
+    actual_top_y = rectangle.get_top_y()
+    actual_bottom_y = rectangle.get_bottom_y()
+
+    print(f"Expected left x: {expected_left_x}")
+    print(f"Actual   left x: {actual_left_x}")
+    print(f"Expected right x: {expected_right_x}")
+    print(f"Actual   right x: {actual_right_x}")
+    print(f"Expected top y: {expected_top_y}")
+    print(f"Actual   top y: {actual_top_y}")
+    print(f"Expected bottom y: {expected_bottom_y}")
+    print(f"Actual   bottom y: {actual_bottom_y}")
+
+    result = (actual_left_x, actual_right_x, actual_top_y, actual_bottom_y)
+    if result == expected_output:
+        return True
+    return False
 
 
 def main():
@@ -54,8 +51,10 @@ def main():
     for test_case in test_cases:
         correct = test(*test_case)
         if correct:
+            print("Pass")
             passed += 1
         else:
+            print("Fail")
             failed += 1
     if failed == 0:
         print("============= PASS ==============")

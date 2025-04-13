@@ -1,34 +1,23 @@
-class Siege:
-    def __init__(self, max_speed, efficiency):
-        pass
+class Rectangle:
+    def __init__(self, x1, y1, x2, y2):
+        self.__x1 = min(x1, x2)
+        self.__y1 = min(y1, y2)
+        self.__x2 = max(x1, x2)
+        self.__y2 = max(y1, y2)
 
-    def get_trip_cost(self, distance, food_price):
-        pass
+    def get_left_x(self):
+        return self.__x1
 
-    def get_cargo_volume(self):
-        pass
+    def get_right_x(self):
+        return self.__x2
 
+    def get_top_y(self):
+        return self.__y2
 
-class BatteringRam(Siege):
-    def __init__(
-        self,
-        max_speed,
-        efficiency,
-        load_weight,
-        bed_area,
-    ):
-        pass
+    def get_bottom_y(self):
+        return self.__y1
 
-    def get_trip_cost(self, distance, food_price):
-        pass
+    # don't touch below this line
 
-    def get_cargo_volume(self):
-        pass
-
-
-class Catapult(Siege):
-    def __init__(self, max_speed, efficiency, cargo_volume):
-        pass
-
-    def get_cargo_volume(self):
-        pass
+    def __repr__(self):
+        return f"Rectangle({self.__x1}, {self.__y1}, {self.__x2}, {self.__y2})"
