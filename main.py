@@ -1,15 +1,34 @@
-class Rectangle:
-    def __init__(self, length, width):
-        self.__length = length
-        self.__width = width
+class Siege:
+    def __init__(self, max_speed, efficiency):
+        pass
 
-    def get_area(self):
-        return self.__width * self.__length
+    def get_trip_cost(self, distance, food_price):
+        pass
 
-    def get_perimeter(self):
-        return 2 * (self.__length +  self.__width)
+    def get_cargo_volume(self):
+        pass
 
 
-class Square(Rectangle):
-    def __init__(self, length):
-        super().__init__(length, length)
+class BatteringRam(Siege):
+    def __init__(
+        self,
+        max_speed,
+        efficiency,
+        load_weight,
+        bed_area,
+    ):
+        pass
+
+    def get_trip_cost(self, distance, food_price):
+        pass
+
+    def get_cargo_volume(self):
+        pass
+
+
+class Catapult(Siege):
+    def __init__(self, max_speed, efficiency, cargo_volume):
+        pass
+
+    def get_cargo_volume(self):
+        pass
