@@ -1,3 +1,4 @@
+
 class Rectangle:
     def __init__(self, x1, y1, x2, y2):
         self.__x1 = min(x1, x2)
@@ -7,12 +8,6 @@ class Rectangle:
 
     def get_left_x(self):
         return self.__x1
-
-    def get_right_x(self):
-        return self.__x2
-
-    def get_top_y(self):
-        return self.__y2
 
     def get_bottom_y(self):
         return self.__y1
