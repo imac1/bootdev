@@ -22,4 +22,7 @@ class Archer(Hero):
         self.__num_arrows = num_arrows
 
     def shoot(self, target):
-        pass
+        if self.__num_arrows <= 0:
+            raise Exception('not enough arrows')
+        self.__num_arrows -= 1
+        target.take_damage(10)
