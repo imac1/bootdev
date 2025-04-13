@@ -1,40 +1,27 @@
-class Hero:
-    def __init__(self, name, health):
-        self.__name = name
-        self.__health = health
+class Unit:
+    def __init__(self, name, pos_x, pos_y):
+        self.name = name
+        self.pos_x = pos_x
+        self.pos_y = pos_y
 
-    def get_name(self):
-        return self.__name
-
-    def get_health(self):
-        return self.__health
-
-    def take_damage(self, damage):
-        self.__health -= damage
+    def in_area(self, x_1, y_1, x_2, y_2):
+        return x_1 <= self.pos_x <= x_2 and y_1 <= self.pos_y <= y_2
 
 
-class Archer(Hero):
-    def __init__(self, name, health, num_arrows):
-        super().__init__(name, health)
-        self.__num_arrows = num_arrows
+class Dragon(Unit):
+    def __init__(self, name, pos_x, pos_y, fire_range):
+        super().__init__(name, pos_x, pos_y)
+        self.__fire_range = fire_range
 
-    def shoot(self, target):
-        if self.__num_arrows <= 0:
-            raise Exception("not enough arrows")
-        self.__num_arrows -= 1
-        target.take_damage(10)
+    def breathe_fire(self, x, y, units):
+        x1 = x - self.__fire_range
+        y1 = y - self.__fire_range
+        x2 = x + self.__fire_range
+        y2 = y + self.__fire_range
 
+        new_units = []
 
-# don't touch above this line
-
-
-class Wizard(Hero):
-    def __init__(self, name, health, mana):
-        super().__init__(name, health)
-        self.__mana = mana
-
-    def cast(self, target):
-        if self.__mana <= 25:
-            raise Exception('not enough mana')
-        self.__mana -= 25
-        target.take_damage(25)
+        for unit in units:
+            if unit.in_area(x1, y1, x2, y2):
+                new_units.append(unit)
+        return new_units
