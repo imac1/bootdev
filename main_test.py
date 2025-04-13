@@ -1,4 +1,4 @@
-from main import Human
+from main import Hero
 
 run_cases = [
     (("Hercules", 200), ("Pericles", 100, 2), 190),
