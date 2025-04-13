@@ -10,6 +10,16 @@ def main():
 
     # ?
 
+    for dragon in dragons:
+        describe(dragon)
+
+    for dragon in dragons:
+        other_dragons = []
+        for item in dragons:
+            if item != dragon:
+                other_dragons.append(item)
+        dragon.breathe_fire(3, 3, other_dragons)
+
 
 # don't touch below this line
 
