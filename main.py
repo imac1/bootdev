@@ -18,13 +18,22 @@ class Unit:
 
 class Dragon(Unit):
     def __init__(self, name, pos_x, pos_y, height, width, fire_range):
-        pass
+        super().__init__(name, pos_x, pos_y)
+
+        self.height = height
+        self.width = width
+        self.fire_range = fire_range
+
+        x1 = pos_x - width / 2
+        y1 = pos_y - height / 2
+        x2 = pos_x + width / 2
+        y2 = pos_y + height / 2
+
+        self.__hit_box = Rectangle(x1, y1, x2, y2)
 
     def in_area(self, x1, y1, x2, y2):
-        pass
-
-
-# don't touch below this line
+        area_rect = Rectangle(x1, y1, x2, y2)
+        return self.__hit_box.overlaps(area_rect)
 
 
 class Rectangle:
