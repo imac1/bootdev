@@ -18,9 +18,20 @@ class Unit:
 
 class Dragon(Unit):
     def __init__(self, name, pos_x, pos_y, height, width, fire_range):
-        pass
+        super().__init__(name, pos_x, pos_y)
+        self.__name = name
+        self.__pos_x = pos_x
+        self.__pos_y = pos_y
+        self.__height = height
+        self.__width = width
+        self.__fire_range = fire_range
+
+        self.__hit_box = Rectangle(pos_x, pos_y, height, width)
+
+
 
     def in_area(self, x1, y1, x2, y2):
+        
         pass
 
 
