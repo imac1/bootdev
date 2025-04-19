@@ -28,11 +28,9 @@ class Dragon(Unit):
 
         self.__hit_box = Rectangle(pos_x, pos_y, height, width)
 
-
-
     def in_area(self, x1, y1, x2, y2):
-        
-        pass
+        rectangle_area = Rectangle(x1, x2, y1, y2)
+        self.__hit_box.overlaps(rectangle_area)
 
 
 # don't touch below this line
