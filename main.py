@@ -11,7 +11,7 @@ class Card:
         self.suit_index = SUITS.index(suit)
 
     def __eq__(self, other):
-        pass
+        return self.__rank == other.rank_index and self.__suit == other.suit_index 
 
     def __lt__(self, other):
         pass
