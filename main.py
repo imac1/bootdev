@@ -5,10 +5,7 @@ RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", 
 
 class Card:
     def __init__(self, rank, suit):
-        self.__rank = rank
-        self.__suit = suit
-        self.rank_index = RANKS.index(rank)
-        self.suit_index = SUITS.index(suit)
+        pass
 
     def __eq__(self, other):
         pass
