@@ -7,8 +7,6 @@ class Card:
     def __init__(self, rank, suit):
         self.__rank = rank
         self.__suit = suit
-        self.rank_index = RANKS.index(rank)
-        self.suit_index = SUITS.index(suit)
 
     def __eq__(self, other):
         pass
