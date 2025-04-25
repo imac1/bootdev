@@ -14,7 +14,9 @@ class Card:
         return self.__rank == other.rank_index and self.__suit == other.suit_index 
 
     def __lt__(self, other):
-        pass
+        if (self.rank_index == other.rank_index):
+            return self.suit_index < other.suit_index
+        return self.rank_index < other.rank_index
 
     def __gt__(self, other):
         pass
